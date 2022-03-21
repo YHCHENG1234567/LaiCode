@@ -1,60 +1,46 @@
 public class Solution {
     public static void main(String[] args) {
-        int[][] a = new int[][]{{1,1,1}, {1,0,1},{1,1,1}};
+        String a = "aaaaaabbabb";
         Solution B = new Solution();
-        int c = B.largestSquareSurroundedByOne(a);
+        int c = B.minCuts(a);
         System.out.print(c);
     }
-    //First Change
-    public int largestSquareSurroundedByOne(int[][] matrix) {
-        int M = matrix.length;
-        if(M==0) return 0;
-        int N = matrix[0].length;
-        if(N==0) return 0;
-        int[][] left = new int[M][N];
-        int[][] up = new int[M][N];
-        int[][] result = new int[M][N];
-        leftUp(matrix, left, up, M, N);
-        merge(result, left, up, M, N);
-        int max = 0;
-        for(int i=M-1; i>=0; i--){
-            for(int j=N-1; j>=0; j--){
-                for(int k = result[i][j]; k>=1; k--){
-                    if(up[i][j-k+1]>=k && left[i-k+1][j]>=k){
-                        max = Math.max(max, k);
-                        break;
-                    }
+    public int minCuts(String input) {
+        if(input.length()<=1) return 0;
+        int[] M = new int[input.length()+1];
+        M[0] = 0;
+        for(int i = 0; i<input.length(); i++){
+            int minPN = input.length();
+            for(int j = 0; j<=i; j++){
+                if(isPalindromes(input, j, i)){
+                    int palinNumber = M[j] + 1;
+                    minPN = Math.min(minPN, palinNumber);
                 }
             }
+            M[i+1] = minPN;
         }
-        return max;
+        return M[input.length()] -1;
     }
-    public void leftUp(int[][] matrix, int[][] left, int[][] up, int M, int N){
-        for(int i=0; i<M; i++){
-            for(int j=0; j<N; j++){
-                if(matrix[i][j]==1){
-                    if(i==0 && j==0){
-                        left[i][j] = 1;
-                        up[i][j] = 1;
-                    } else if (i==0){
-                        left[i][j] = left[i][j-1] + 1;
-                        up[i][j] = 1;
-                    } else if (j==0){
-                        left[i][j] = 1;
-                        up[i][j] = up[i-1][j] + 1;
-                    } else {
-                        left[i][j] = left[i][j-1] + 1;
-                        up[i][j] = up[i-1][j] + 1;
-                    }
-                }
+    //   if(input.length()<=1) return 0;
+    //   return helper(input, 0, input.length()-1);
+    // }
+    // public int helper(String input, int start, int end){
+    //   if(isPalindromes(input, start, end)) return 0;
+    //   int minCut = end-start;
+    //   for(int cutPoint = start; cutPoint<end; cutPoint++){
+    //     int cut = helper(input, start, cutPoint) + helper(input, cutPoint+1, end) + 1;
+    //     minCut = Math.min(cut, minCut);
+    //   }
+    //   return minCut;
+    // }
+    public boolean isPalindromes(String s, int start, int end){
+        while(start<=end){
+            if(s.charAt(start)!=s.charAt(end)){
+                return false;
             }
+            start++;
+            end--;
         }
-    }
-    public void merge(int[][] result, int[][] a, int[][] b, int N, int M){
-        for(int i = 0; i<N; i++){
-            for(int j = 0; j<M; j++){
-                result[i][j] = Math.min(a[i][j], b[i][j]);
-            }
-        }
+        return true;
     }
 }
