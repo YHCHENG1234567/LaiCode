@@ -1,20 +1,22 @@
 public class finalExamTwo {
     public int distanceFinder(TreeNode root, int a, int b){
         if(root == null) return 0;
-        return lcaFinder(root,Math.min(a,b), Math.max(a,b));
+        int smaller = Math.min(a,b);
+        int larger = Math.max(a,b);
+        TreeNode lca = lcaFinder(root, smaller, larger);
+        return distance(lca, smaller) + distance(lca, larger);
     }
-    private int lcaFinder(TreeNode root, int smaller, int larger){
+    private TreeNode lcaFinder(TreeNode root, int smaller, int larger){
         TreeNode lca = null;
-        while(lca!=root){
+        while(true){
             if(root.key < smaller){
                 root = root.right;
             } else if (root.key > larger){
                 root = root.left;
             } else {
-                lca = root;
+                return lca;
             }
         }
-        return distance(lca, smaller) + distance(lca, larger);
     }
     private int distance(TreeNode root, int a){
         int distance = 0;
