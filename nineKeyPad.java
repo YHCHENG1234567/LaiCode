@@ -1,7 +1,7 @@
 import java.util.*;
-class Solution {
+class nineKeyPad {
     public static void main(String[] args) {
-        Solution a = new Solution();
+        nineKeyPad a = new nineKeyPad();
         String test1 = "abcdefghijjj"; //13
         String test2 = "abcdefghijklmnopqrstuvwxyzzz";//53
         String test3 = "woshiyeyuanxinzhizhuwusui";//28 我是野原新之助 五岁
