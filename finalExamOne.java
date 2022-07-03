@@ -18,7 +18,7 @@ public class finalExamOne {
         }
         if(cur < input.length()-1){
             int number = (input.charAt(cur) - '0') * 10 + (input.charAt(cur+1)  - '0');
-            if(number >= 1 && number <= 26){
+            if(number >= 10 && number <= 26){
                 sb.append((char)(number - 1 + 'A'));
                 dfs(sb, input, cur+2, result);
                 sb.deleteCharAt(sb.length()-1);

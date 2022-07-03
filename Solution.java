@@ -1,46 +1,32 @@
-public class Solution {
+import java.util.*;
+class Solution {
     public static void main(String[] args) {
-        String a = "aaaaaabbabb";
-        Solution B = new Solution();
-        int c = B.minCuts(a);
-        System.out.print(c);
+        Solution a = new Solution();
+        String test1 = "abcdefghijjj"; //13
+        String test2 = "abcdefghijklmnopqrstuvwxyzzz";//53
+        String test3 = "woshiyeyuanxinzhizhuwusui";//28 我是野原新之助 五岁
+        System.out.println(a.findPressTime(test1));
+        System.out.println(a.findPressTime(test2));
+        System.out.println(a.findPressTime(test3));
     }
-    public int minCuts(String input) {
-        if(input.length()<=1) return 0;
-        int[] M = new int[input.length()+1];
-        M[0] = 0;
-        for(int i = 0; i<input.length(); i++){
-            int minPN = input.length();
-            for(int j = 0; j<=i; j++){
-                if(isPalindromes(input, j, i)){
-                    int palinNumber = M[j] + 1;
-                    minPN = Math.min(minPN, palinNumber);
-                }
-            }
-            M[i+1] = minPN;
+    private int findPressTime(String input){
+        char[] a = input.toCharArray();
+        Integer[] countMap = new Integer[26];
+        Arrays.fill(countMap, 0);
+        for(int i = 0; i<a.length; i++){
+            countMap[a[i] - 'a']++;
         }
-        return M[input.length()] -1;
-    }
-    //   if(input.length()<=1) return 0;
-    //   return helper(input, 0, input.length()-1);
-    // }
-    // public int helper(String input, int start, int end){
-    //   if(isPalindromes(input, start, end)) return 0;
-    //   int minCut = end-start;
-    //   for(int cutPoint = start; cutPoint<end; cutPoint++){
-    //     int cut = helper(input, start, cutPoint) + helper(input, cutPoint+1, end) + 1;
-    //     minCut = Math.min(cut, minCut);
-    //   }
-    //   return minCut;
-    // }
-    public boolean isPalindromes(String s, int start, int end){
-        while(start<=end){
-            if(s.charAt(start)!=s.charAt(end)){
-                return false;
+        Arrays.sort(countMap, Collections.reverseOrder());
+        int res = 0;
+        for(int j = 0; j<26; j++){
+            if(j<=8){
+                res+=countMap[j];
+            } else if(j<=17){
+                res+=countMap[j]*2;
+            } else {
+                res+=countMap[j]*3;
             }
-            start++;
-            end--;
         }
-        return true;
+        return res;
     }
 }
