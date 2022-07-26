@@ -35,6 +35,10 @@ public class VendingMachine {
         System.out.println("Insert " + cash + " dollars into Vending machine successful!");
     }
 
+    public void showRemainCash(){
+        System.out.println("The remainig cash is " + this.cashInput + " dollars.");
+    }
+
     public void showItems(){
         System.out.println("Current Inventory: ");
         for(Map.Entry<String, Integer> cur: numberMap.entrySet()){
@@ -66,6 +70,7 @@ public class VendingMachine {
         }
         System.out.println("Purchase Successful");
         System.out.println("   You get " + number + " " + product + ".");
+        System.out.println("   " + moneyNeeded + " dollars spent.");
         return true;
     }
 

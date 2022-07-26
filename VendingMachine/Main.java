@@ -15,6 +15,8 @@ public class Main {
         v.buyItem("Perrier", 5);
         v.buyItem("Waterloo", 1);
 
+        v.showRemainCash();
+
         v.showItems();
         v.refund();
 
