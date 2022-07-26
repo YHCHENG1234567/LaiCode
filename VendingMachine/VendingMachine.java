@@ -38,7 +38,7 @@ public class VendingMachine {
     public void showItems(){
         System.out.println("Current Inventory: ");
         for(Map.Entry<String, Integer> cur: numberMap.entrySet()){
-            System.out.println("      " + cur.getValue() + " * " + cur.getKey());
+            System.out.println("      " + cur.getValue() + " * " + cur.getKey() + ". Priced at " + priceMap.get(cur.getKey()) + " dollars each.");
         }
     }
 
@@ -65,7 +65,7 @@ public class VendingMachine {
             numberMap.put(product, newNumber);
         }
         System.out.println("Purchase Successful");
-        System.out.println("You get " + number + " " + product);
+        System.out.println("   You get " + number + " " + product + ".");
         return true;
     }
 
