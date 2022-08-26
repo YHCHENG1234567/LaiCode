@@ -1,5 +1,12 @@
 import java.util.*;
 
+//Given a String S, a String T, an Integer k
+//Score rule for substring:
+//        if substring contains exact all letters in String T, score = 1000
+//        for each additional letter existing in T, score -= 1 * letterValue
+//        for each additional letter not existing in T, score -= 1.5 * letterValue
+//        letterValue: A is 0.01, B is 0.02, and so on...
+//Find the top k substrings in String S with the highest score, return the List of String
 class LC76Improve {
     public static void main(String[] args) {
         LC76Improve m = new LC76Improve();
@@ -62,3 +69,6 @@ class LC76Improve {
         return score;
     }
 }
+
+        //TC: log(k) * n^2
+        //SC: k
